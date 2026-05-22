@@ -26,4 +26,14 @@ void CGameMgr::Render()
 
 void CGameMgr::Release()
 {
+	for (int i = 0; i < MGR_END; ++i) {
+		Safe_Delete(m_arrMgr[i]);
+	}
+
+	if (m_hWnd && m_hDC)
+	{
+		ReleaseDC(m_hWnd, m_hDC);
+		m_hDC = nullptr;
+		m_hWnd = nullptr;
+	}
 }
