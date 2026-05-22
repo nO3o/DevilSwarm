@@ -1,50 +1,65 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
+# ====================================================================
+# 1. 빌드 결과물 및 실행 파일 (Compiled Objects / Executables)
+# ====================================================================
 *.slo
 *.lo
 *.o
 *.obj
+*.exe
+*.out
+*.app
+Debug/
+Release/
+x64/
+x86/
+ARM/
+ARM64/
 
-# Precompiled Headers
+# ====================================================================
+# 2. 링커 / 디버거 / 프리컴파일드 헤더 (Linker, Debugger, PCH)
+# ====================================================================
+*.ilk
+*.pdb
+*.idb
 *.gch
 *.pch
+*.pch.ilk
+*.dwo
+*.tlog
+*.recipe
+*.lastcodeanalysissucceeded
+*.CodeAnalysisLog.xml
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
+# ====================================================================
+# 3. 라이브러리 파일 (Static / Dynamic Libraries)
+# ====================================================================
 *.so
 *.dylib
 *.dll
 *.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
 *.lai
 *.la
 *.a
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
+# ====================================================================
+# 4. IDE 및 패키지 매니저 설정 (Visual Studio / CMake / vcpkg)
+# ====================================================================
+.vs/
+*.user
+*.suo
+*.sln.docstates
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+*.db
+vcpkg_installed/
 
-# Build directories
+# Build & CMake directories
 build/
 Build/
 build-*/
-
-# CMake generated files
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
@@ -52,18 +67,18 @@ Makefile
 install_manifest.txt
 compile_commands.json
 
-# Temporary files
+# ====================================================================
+# 5. 임시 및 데이터 파일 (Temporary / Miscellaneous)
+# ====================================================================
+*.d
+*.mod
+*.smod
 *.tmp
 *.log
 *.bak
 *.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
+*.aps
+*.cache
+*.dump
 Testing/
 .cache/
