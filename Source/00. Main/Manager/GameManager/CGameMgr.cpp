@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CGameMgr.h"
 
-void CGameMgr::Initialize()
+void CGameMgr::Initialize(HWND hWnd)
 {
 }
 

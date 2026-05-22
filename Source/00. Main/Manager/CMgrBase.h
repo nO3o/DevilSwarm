@@ -6,13 +6,14 @@ public:
 	virtual ~CMgrBase() {}
 
 public:
-	virtual void Initialize() PURE;
+	virtual void Initialize(HWND hWnd) PURE;
 	virtual void Update() PURE;
 	virtual void LateUpdate() PURE;
 	virtual void Render() PURE;
 	virtual void Release() PURE;
 
 private:
-	HDC m_hDC;
+	HWND m_hWnd;
+	HDC	 m_hDC;
 };
 
