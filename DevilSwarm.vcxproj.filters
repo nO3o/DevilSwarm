@@ -14,27 +14,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>소스 파일\PCH</Filter>
-    </ClInclude>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="Source\00. Main\framework.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
+    <ClInclude Include="Source\05. Resource\Resource.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="Source\00. Main\targetver.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="DevilSwarm.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
+    <ClInclude Include="Source\00. Main\DevilSwarm.h" />
+    <ClInclude Include="Source\00. Main\PCH\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일\PCH</Filter>
+    <ClCompile Include="Source\00. Main\DevilSwarm.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="DevilSwarm.cpp">
+    <ClCompile Include="Source\00. Main\PCH\pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,5 +46,10 @@
     <Image Include="DevilSwarm.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="LICENSE" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
