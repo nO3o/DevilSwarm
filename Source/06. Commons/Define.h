@@ -7,6 +7,7 @@
 
 #define PURE	= 0
 
+enum MANAGERS {MGR_OBJ, MGR_SCENE, MGR_DATA, MGR_END};
 
 template<typename T>
 void Safe_Delete(T& p)

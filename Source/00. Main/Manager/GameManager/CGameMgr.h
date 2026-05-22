@@ -5,7 +5,7 @@ class CGameMgr :
     public CMgrBase
 {
 public:
-    CGameMgr();
+    CGameMgr():m_arrMgr() {};
     virtual ~CGameMgr() { Release(); }
 
 public:
@@ -15,5 +15,8 @@ public:
     void LateUpdate() override;
     void Render() override;
     void Release() override;
+
+private:
+    CMgrBase* m_arrMgr[MGR_END];
 };
 

@@ -2,7 +2,7 @@
 class CMgrBase
 {
 public:
-	CMgrBase() {}
+	CMgrBase(): m_hWnd(nullptr), m_hDC(nullptr) {}
 	virtual ~CMgrBase() {}
 
 public:
@@ -12,7 +12,7 @@ public:
 	virtual void Render() PURE;
 	virtual void Release() PURE;
 
-private:
+protected:
 	HWND m_hWnd;
 	HDC	 m_hDC;
 };
