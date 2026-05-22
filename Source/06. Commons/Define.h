@@ -7,7 +7,6 @@
 
 #define PURE	= 0
 
-extern HWND g_hWnd;
 
 template<typename T>
 void Safe_Delete(T& p)
