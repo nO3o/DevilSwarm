@@ -1,2 +1,2 @@
 #include "pch.h"
-#include "CManagerBase.h"
+#include "CMgrBase.h"

@@ -25,12 +25,21 @@
     </ClInclude>
     <ClInclude Include="Source\00. Main\DevilSwarm.h" />
     <ClInclude Include="Source\00. Main\PCH\pch.h" />
+    <ClInclude Include="Source\00. Main\Manager\CMgrBase.h" />
+    <ClInclude Include="Source\06. Commons\Define.h" />
+    <ClInclude Include="Source\00. Main\Manager\GameManager\CGameMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\00. Main\DevilSwarm.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Source\00. Main\PCH\pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\00. Main\Manager\CMgrBase.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\00. Main\Manager\GameManager\CGameMgr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

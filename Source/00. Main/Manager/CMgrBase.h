@@ -1,9 +1,9 @@
 #pragma once
-class CManagerBase
+class CMgrBase
 {
 public:
-	CManagerBase() {}
-	virtual ~CManagerBase() {}
+	CMgrBase() {}
+	virtual ~CMgrBase() {}
 
 public:
 	virtual void Initialize() PURE;

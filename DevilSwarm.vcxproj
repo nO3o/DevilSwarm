@@ -132,13 +132,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\00. Main\Manager\GameManager\CGameMgr.h" />
+    <ClInclude Include="Source\00. Main\Manager\CMgrBase.h" />
     <ClInclude Include="Source\00. Main\DevilSwarm.h" />
     <ClInclude Include="Source\00. Main\framework.h" />
     <ClInclude Include="Source\00. Main\PCH\pch.h" />
     <ClInclude Include="Source\05. Resource\Resource.h" />
     <ClInclude Include="Source\00. Main\targetver.h" />
+    <ClInclude Include="Source\06. Commons\Define.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\00. Main\Manager\GameManager\CGameMgr.cpp" />
+    <ClCompile Include="Source\00. Main\Manager\CMgrBase.cpp" />
     <ClCompile Include="Source\00. Main\DevilSwarm.cpp" />
     <ClCompile Include="Source\00. Main\PCH\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
