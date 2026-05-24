@@ -22,6 +22,9 @@
     <Filter Include="소스 파일\Singleton\GameMgr">
       <UniqueIdentifier>{fa35d1de-0f3a-424d-ae2e-fa0cd49278d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects">
+      <UniqueIdentifier>{bfc194f5-e788-444b-ae97-7fa615561b43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,6 +54,9 @@
     <ClInclude Include="Singleton.h">
       <Filter>소스 파일\Singleton</Filter>
     </ClInclude>
+    <ClInclude Include="CObj.h">
+      <Filter>소스 파일\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DevilSwarm.cpp">
@@ -61,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="CGameMgr.cpp">
       <Filter>소스 파일\Singleton\GameMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CObj.cpp">
+      <Filter>소스 파일\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

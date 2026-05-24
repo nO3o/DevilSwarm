@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "CGameMgr.h"
+#include "CObj.h"
 
 IMPLEMENT_SINGLETON(CGameMgr);
 
-CGameMgr::CGameMgr()
+CGameMgr::CGameMgr() :m_hDC(nullptr)
 {
 }
 
@@ -19,6 +20,7 @@ inline void CGameMgr::Run() {
 
 void CGameMgr::Initialize()
 {
+	m_hDC = GetDC(g_hWnd);
 }
 
 void CGameMgr::Update()
@@ -35,4 +37,5 @@ void CGameMgr::Render()
 
 void CGameMgr::Release()
 {
+	ReleaseDC(g_hWnd, m_hDC);
 }

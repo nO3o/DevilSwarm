@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CGameMgr.h" />
+    <ClInclude Include="CObj.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DevilSwarm.h" />
     <ClInclude Include="framework.h" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CGameMgr.cpp" />
+    <ClCompile Include="CObj.cpp" />
     <ClCompile Include="DevilSwarm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
