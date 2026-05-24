@@ -4,7 +4,7 @@
 
 IMPLEMENT_SINGLETON(CGameMgr);
 
-CGameMgr::CGameMgr() :m_hDC(nullptr)
+CGameMgr::CGameMgr() :m_hDC(nullptr), m_eState(STATE_TITLE)
 {
 }
 
@@ -12,7 +12,7 @@ CGameMgr::~CGameMgr()
 {
 }
 
-inline void CGameMgr::Run() {
+void CGameMgr::Run() {
 	Update();
 	LateUpdate();
 	Render();

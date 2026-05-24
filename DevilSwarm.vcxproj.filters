@@ -25,6 +25,9 @@
     <Filter Include="소스 파일\Objects">
       <UniqueIdentifier>{bfc194f5-e788-444b-ae97-7fa615561b43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Objects\Player">
+      <UniqueIdentifier>{fd0faf16-2b0a-41e7-86a3-8b5a4cab8440}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -57,6 +60,9 @@
     <ClInclude Include="CObj.h">
       <Filter>소스 파일\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>소스 파일\Objects\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DevilSwarm.cpp">
@@ -70,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="CObj.cpp">
       <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>소스 파일\Objects\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

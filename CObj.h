@@ -7,7 +7,7 @@ public:
 
 public:
 	virtual void Initialize() PURE;
-	virtual void Update() PURE;
+	virtual int Update() PURE;
 	virtual void LateUpdate() PURE;
 	virtual void Render(HDC hDC) PURE;
 	virtual void Release() PURE;
@@ -17,6 +17,7 @@ protected:
 	RECT m_tRect;
 	CObj* m_pObj;
 	
+	float m_fHP;
 	float m_fSpeed;
 	float m_fAngle;
 	bool m_bDead;
@@ -29,6 +30,7 @@ public:
 public:
 	void SetPos(float fX, float fY) { m_tInfo.fX = fX; m_tInfo.fY = fY; }
 	void SetObj(CObj* pObj) { m_pObj = pObj; }
+	void SetHP(float HP) { m_fHP = HP; }
 	void SetAngle(float fAngle) { m_fAngle = fAngle; }
 	void SetDead() { m_bDead = true; }
 

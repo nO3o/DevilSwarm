@@ -1,16 +1,8 @@
 #pragma once
 
-#define WINCX	800
-#define WINCY	600
-
-#define PI		3.141592f
-
-#define PURE	= 0
-
-#define NOEVENT 0
-#define DEAD 1
-
 typedef struct tagInfo {
 	float fX, fY;
 	float fCX, fCY;
 }INFO;
+
+enum STATE {STATE_TITLE, STATE_LOBBY, STATE_STAGE_SELECT, STATE_INGAME, STATE_LEVELUP_CARD, STATE_GAMEOVER,STATE_CLEAR, STATE_PAUSE, STATE_END};

@@ -13,8 +13,8 @@
 #include <vector>
 #include <algorithm>
 
-#include "GameType.h"
 #include "Define.h"
+#include "GameType.h"
 
 #ifdef _DEBUG
 

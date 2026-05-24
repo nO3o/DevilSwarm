@@ -147,14 +147,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 
     switch (message) {
 
-        case WM_KEYDOWN:
-            switch (wParam) {
-                case VK_ESCAPE:
-                    PostQuitMessage(0);
-                    break;
-            }
-        break;
-
         case WM_COMMAND: {
              int wmId = LOWORD(wParam);
              // 메뉴 선택을 구문 분석합니다:
