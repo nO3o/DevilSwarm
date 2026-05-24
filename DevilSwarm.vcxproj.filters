@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -12,6 +8,19 @@
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\core">
+      <UniqueIdentifier>{9a3ced71-81d4-4e91-829d-4b3b349f1dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Singleton">
+      <UniqueIdentifier>{d6db41c4-7d80-4438-a080-1acab69151ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Singleton\GameMgr">
+      <UniqueIdentifier>{fa35d1de-0f3a-424d-ae2e-fa0cd49278d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,7 +37,19 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameType.h">
+      <Filter>소스 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>소스 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameMgr.h">
+      <Filter>소스 파일\Singleton\GameMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>소스 파일\Singleton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameMgr.cpp">
+      <Filter>소스 파일\Singleton\GameMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
