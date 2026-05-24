@@ -28,6 +28,12 @@
     <Filter Include="소스 파일\Objects\Player">
       <UniqueIdentifier>{fd0faf16-2b0a-41e7-86a3-8b5a4cab8440}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Singleton\ObjMgr">
+      <UniqueIdentifier>{48e1777f-74c1-4831-b4d5-f7f8d2364ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Bullet">
+      <UniqueIdentifier>{9e5e5490-e22c-4c6c-98e9-804dcdf29b95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -63,6 +69,15 @@
     <ClInclude Include="CPlayer.h">
       <Filter>소스 파일\Objects\Player</Filter>
     </ClInclude>
+    <ClInclude Include="CObjMgr.h">
+      <Filter>소스 파일\Singleton\ObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbstractFactory.h">
+      <Filter>소스 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet.h">
+      <Filter>소스 파일\Objects\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DevilSwarm.cpp">
@@ -79,6 +94,12 @@
     </ClCompile>
     <ClCompile Include="CPlayer.cpp">
       <Filter>소스 파일\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjMgr.cpp">
+      <Filter>소스 파일\Singleton\ObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet.cpp">
+      <Filter>소스 파일\Objects\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

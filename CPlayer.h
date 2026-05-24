@@ -22,11 +22,16 @@ public:
     void HealHP(float HP) { m_fHP += HP; }
     void IncreaseHP(float MaxHP) { m_fMaxHP = MaxHP; RestoreHP(); }
 
+public:
+    template<typename T>
+    CObj* CreateBullet();
+
 private:
     float m_fMaxHP;
     float m_fShild;
     float m_fRageCurrent;
     float m_fRageMax;
     float m_fRageRate;
+    float m_fAttackDelay;
+    float m_fAttackTimer;
 };
-

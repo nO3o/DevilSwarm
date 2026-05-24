@@ -131,8 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAbstractFactory.h" />
+    <ClInclude Include="CBullet.h" />
     <ClInclude Include="CGameMgr.h" />
     <ClInclude Include="CObj.h" />
+    <ClInclude Include="CObjMgr.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DevilSwarm.h" />
@@ -144,8 +147,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CGameMgr.cpp" />
     <ClCompile Include="CObj.cpp" />
+    <ClCompile Include="CObjMgr.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="DevilSwarm.cpp" />
     <ClCompile Include="pch.cpp">

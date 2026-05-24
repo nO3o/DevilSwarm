@@ -20,6 +20,6 @@ public:
 
 private:
 	HDC m_hDC;
-	STATE eState;
+	STATE m_eState;
 };
 
