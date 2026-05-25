@@ -17,20 +17,23 @@ protected:
 	RECT m_tRect;
 	CObj* m_pObj;
 	
-	float m_fHP;
+	int m_iHP;
+	int m_iMaxHP;
+	bool m_bDead;
 	float m_fSpeed;
 	float m_fAngle;
-	bool m_bDead;
 
 public:
 	const INFO* GetInfo() const { return &m_tInfo; }
 	const RECT* GetRect() const { return &m_tRect; }
 	const bool& GetDead() const { return m_bDead; }
+	int GetHP() const { return m_iHP; }
+	int GetMaxHP() const { return m_iMaxHP; }
 
 public:
 	void SetPos(float fX, float fY) { m_tInfo.fX = fX; m_tInfo.fY = fY; }
 	void SetObj(CObj* pObj) { m_pObj = pObj; }
-	void SetHP(float HP) { m_fHP = HP; }
+	void SetHP(float HP) { m_iHP = HP; }
 	void SetAngle(float fAngle) { m_fAngle = fAngle; }
 	void SetDead() { m_bDead = true; }
 

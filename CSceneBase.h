@@ -1,4 +1,6 @@
 #pragma once
+#include "CSceneMgr.h"
+
 class CSceneBase
 {
 public:

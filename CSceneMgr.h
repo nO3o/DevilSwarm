@@ -19,9 +19,10 @@ public:
 private:
 	HDC m_hDC;
 	CSceneBase* m_pScene;
+	GAME_STATE m_ThisState;
 	GAME_STATE m_eNextState;
 
 public:
-	void SetState(GAME_STATE eState) { m_eNextState = eState; }
+	void CheckState();
 };
 

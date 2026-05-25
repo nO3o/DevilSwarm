@@ -18,20 +18,25 @@ public:
     void KeyInput();
 
 public:
-    void RestoreHP() { m_fHP = m_fMaxHP; }
-    void HealHP(float HP) { m_fHP += HP; }
-    void IncreaseHP(float MaxHP) { m_fMaxHP = MaxHP; RestoreHP(); }
+    void RestoreHP() { m_iHP = m_iMaxHP; }
+    void HealHP(float HP) { m_iHP += HP; }
+    void IncreaseHP(float MaxHP) { m_iMaxHP = MaxHP; RestoreHP(); }
+
+public:
+    const int GetLevel() const { return m_iLevel; }
+    const int GetEXP() const { return m_iEXP; }
+    const int GetMaxEXP() const { return m_iMaxEXP; }
+    const int GetShield() const { return m_iShild; }
 
 public:
     template<typename T>
     CObj* CreateBullet();
 
 private:
-    float m_fMaxHP;
-    float m_fShild;
-    float m_fRageCurrent;
-    float m_fRageMax;
-    float m_fRageRate;
+    int m_iLevel;
+    int m_iEXP;
+    int m_iMaxEXP;
+    int m_iShild;
     float m_fAttackDelay;
     float m_fAttackTimer;
 };

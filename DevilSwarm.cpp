@@ -146,6 +146,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     switch (message) {
+        case WM_ERASEBKGND:
+            return TRUE;
 
         case WM_COMMAND: {
              int wmId = LOWORD(wParam);

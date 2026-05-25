@@ -21,5 +21,6 @@ private:
 
 public:
 	void AddObject(OBJID eID, CObj* pObj);
+	const std::list<CObj*> GetObj(OBJID ID) const { return m_ObjList[ID]; }
 };
 

@@ -5,10 +5,10 @@
 #include "CBullet.h"
 
 CPlayer::CPlayer()
-	:m_fMaxHP(300), m_fShild(0.f),m_fRageCurrent(0.f),
-	m_fRageMax(100.f), m_fRageRate(0.f), m_fAttackDelay(0.f),
-	m_fAttackTimer(0.f)
+	:m_iLevel(1), m_iEXP(0), m_iMaxEXP(10), m_iShild(0),
+	m_fAttackDelay(0.f), m_fAttackTimer(0.f)
 {
+	m_iMaxHP = 300;
 }
 
 CPlayer::~CPlayer()
@@ -18,7 +18,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	SetHP(m_fMaxHP);
+	SetHP(m_iMaxHP);
 	m_tInfo = { 100.f, float(WINCY >> 1), 100.f, 100.f };
 	m_fSpeed = 4.f;
 	m_fAngle = 0.f;

@@ -5,7 +5,7 @@ class CTitle :
 	public CSceneBase {
 
 public:
-	CTitle():m_iMenu(TM_START) {}
+	CTitle():m_iMenu(TITLE_MENU::TM_START) {}
 	virtual ~CTitle() {}
 
 public:
@@ -16,12 +16,12 @@ public:
 	void Release() override;
 
 private:
-	RECT rcLogo = { 240, 72, 560, 204 };
-	RECT menuRects[2] = {
+	RECT m_rcLogo = { 240, 72, 560, 204 };
+	RECT m_menuRects[2] = {
 		{ 304, 324, 496, 360 },
 		{ 304, 372, 496, 408 }
 	};
-	LPCWSTR menuTexts[2] = { L"게임 시작", L"종료" };
+	LPCWSTR m_menuTexts[2] = { L"게임 시작", L"종료" };
 
 	enum TITLE_MENU {TM_START, TM_EXIT, TM_END};
 	int m_iMenu;
