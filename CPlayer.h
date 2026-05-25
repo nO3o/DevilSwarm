@@ -21,12 +21,12 @@ public:
     void RestoreHP() { m_iHP = m_iMaxHP; }
     void HealHP(int HP) { m_iHP += HP; }
     void IncreaseHP(int MaxHP) { m_iMaxHP = MaxHP; RestoreHP(); }
+    bool IncreaseEXP(float EXP);
 
 public:
-    const int GetLevel() const { return m_iLevel; }
-    const int GetEXP() const { return m_iEXP; }
-    const int GetMaxEXP() const { return m_iMaxEXP; }
     const int GetShield() const { return m_iShild; }
+    const int   GetLevel() const { return m_iLevel; }
+    const float GetEXPPer() const { return m_fEXP/m_fMaxEXP*100.f; }
 
 public:
     template<typename T>
@@ -34,9 +34,9 @@ public:
 
 private:
     int m_iLevel;
-    int m_iEXP;
-    int m_iMaxEXP;
     int m_iShild;
+    float m_fEXP;
+    float m_fMaxEXP;
     float m_fAttackDelay;
     float m_fAttackTimer;
 };

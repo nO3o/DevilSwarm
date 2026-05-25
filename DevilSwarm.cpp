@@ -148,6 +148,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     switch (message) {
         case WM_ERASEBKGND:
             return TRUE;
+        case WM_KEYDOWN: {
+            switch (wParam) {
+                 case VK_ESCAPE:
+                     CGameMgr::GetInstance()->DestroyInstance();
+                     PostQuitMessage(0);
+                     break;
+            }
+        }
 
         case WM_COMMAND: {
              int wmId = LOWORD(wParam);

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CObj.h"
 
-CObj::CObj(): m_iHP(0), m_iMaxHP(0), m_bDead(false), m_fSpeed(0.f), m_pObj(nullptr)
+CObj::CObj(): m_iHP(0), m_iMaxHP(0),m_iAttack(10), m_bDead(false), m_fSpeed(0.f), m_pObj(nullptr)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	ZeroMemory(&m_tRect, sizeof(RECT));

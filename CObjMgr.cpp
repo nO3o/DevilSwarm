@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CObjMgr.h"
-IMPLEMENT_SINGLETON(CObjMgr);
+IMPLEMENT_SINGLETON(CObjMgr)
 
 CObjMgr::CObjMgr()
 {

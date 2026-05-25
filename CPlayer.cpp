@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "CPlayer.h"
 #include "CObjMgr.h"
-#include "CAbstractFactory.h"
+#include "CAFObj.h"
 #include "CBullet.h"
 
 CPlayer::CPlayer()
-	:m_iLevel(1), m_iEXP(0), m_iMaxEXP(10), m_iShild(0),
-	m_fAttackDelay(0.f), m_fAttackTimer(0.f)
+	:m_iLevel(1), m_fEXP(0.f), m_fMaxEXP(100.f),
+	m_iShild(0), m_fAttackDelay(0.f), m_fAttackTimer(0.f)
 {
 	m_iMaxHP = 300;
 }
@@ -22,11 +22,12 @@ void CPlayer::Initialize()
 	m_tInfo = { 400.f, 540.f, 40.f, 40.f };
 	m_fSpeed = 4.f;
 	m_fAngle = 0.f;
-	m_fAttackDelay = 0.2f; // 5¹ß/ÃÊ
+	m_fAttackDelay = 0.2f;
 }
 
 int CPlayer::Update()
 {
+
 	const float fDelta = 0.01f; // 10ms
 
 	if (m_fAttackTimer > 0.f) {
@@ -129,10 +130,24 @@ void CPlayer::KeyInput()
 		m_tInfo.fY += m_fSpeed;
 }
 
+bool CPlayer::IncreaseEXP(float EXP) {
+
+	m_fEXP += EXP;
+
+	if (m_fEXP >= m_fMaxEXP) {
+		m_iLevel += 1;
+		m_fEXP = 0.f;
+		m_fMaxEXP *= 1.2f;
+		return true;
+	}
+
+	return false;
+}
+
 template<typename T>
 CObj* CPlayer::CreateBullet()
 {
-	CObj* pBullet = CAbstractFactory<T>::Create();
+	CObj* pBullet = CAFObj<T>::Create();
 
 	pBullet->SetPos(m_tInfo.fX, m_tInfo.fY);
 	pBullet->SetAngle(m_fAngle);

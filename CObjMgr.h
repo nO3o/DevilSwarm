@@ -3,7 +3,7 @@
 #include "CObj.h"
 
 class CObjMgr {
-DECLARE_SINGLETON(CObjMgr);
+DECLARE_SINGLETON(CObjMgr)
 
 private:
 	CObjMgr();

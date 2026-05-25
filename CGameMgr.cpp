@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CGameMgr.h"
 #include "CObj.h"
-#include "CAbstractFactory.h"
+#include "CAFObj.h"
 #include "CObjMgr.h"
 #include "CSceneMgr.h"
 #include "CPlayer.h"
@@ -26,7 +26,7 @@ void CGameMgr::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 	CSceneMgr::GetInstance()->Initialize(m_hDC);
-	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
+	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CAFObj<CPlayer>::Create());
 }
 
 void CGameMgr::Update()

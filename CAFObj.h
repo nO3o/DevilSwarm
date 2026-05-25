@@ -2,11 +2,11 @@
 #include "CObj.h"
 
 template<typename T>
-class CAbstractFactory
+class CAFObj
 {
 public:
-	CAbstractFactory() {}
-	~CAbstractFactory() {}
+	CAFObj() {}
+	~CAFObj() {}
 
 public:
 	static CObj* Create()

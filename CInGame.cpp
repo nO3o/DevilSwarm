@@ -37,7 +37,7 @@ void CInGame::Render(HDC hDC)
     if (m_pPlayer != nullptr)
     {
         WCHAR szXp[32];
-        swprintf_s(szXp, L"경험치 %d / %d", m_pPlayer->GetEXP(), m_pPlayer->GetMaxEXP());
+        swprintf_s(szXp, L"경험치 %.2f%%", m_pPlayer->GetEXPPer());
         DrawTextW(hDC, szXp, -1, &m_rcUI[HUD_XP_BAR], DT_CENTER | DT_VCENTER | DT_SINGLELINE);
     }
 
