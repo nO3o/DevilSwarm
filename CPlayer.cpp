@@ -19,7 +19,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize()
 {
 	SetHP(m_iMaxHP);
-	m_tInfo = { 100.f, float(WINCY >> 1), 100.f, 100.f };
+	m_tInfo = { 400.f, 540.f, 40.f, 40.f };
 	m_fSpeed = 4.f;
 	m_fAngle = 0.f;
 	m_fAttackDelay = 0.2f; // 5πﬂ/√ 
