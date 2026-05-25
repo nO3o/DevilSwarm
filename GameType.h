@@ -5,6 +5,13 @@ typedef struct tagInfo {
 	float fCX, fCY;
 }INFO;
 
+typedef struct tagBullet {
+	float fX, fY;
+	float fVX, fVY;
+	bool  bAlive;
+	bool  bFromPlayer; 
+} BULLET;
+
 enum GAME_STATE {
     GS_TITLE,
     GS_LOBBY,
@@ -29,13 +36,24 @@ enum OBJID {
     OBJ_END 
 };
 
-enum MOB_ID {
-    MONSTER_A,
-    MONSTER_B,
-    MONSTER_SHILD,
-    MONSTER_BOOM,
-    MONSTER_ELITE,
-    BOOS_BUTCHER,
-    BOOS_DIABLO,
-    MOB_END
+enum ENEMY_TYPE {
+	ET_STRAIGHT,
+	ET_ZIGZAG, 
+	ET_DRONE,  
+	ET_ELITE,     
+	ET_END
 };
+
+enum REWARD_TYPE {
+	RT_GOLD, 
+	RT_ITEM_NORM,  
+	RT_ITEM_RARE, 
+	RT_END
+};
+
+enum BOSS_PHASE {
+	BP_ONE = 1,   
+	BP_TWO = 2, 
+	BP_THREE = 3  
+};
+

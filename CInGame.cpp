@@ -2,6 +2,7 @@
 #include "CInGame.h"
 #include "CGameMgr.h"
 #include "CObjMgr.h"
+#include "CEnemyMgr.h"
 #include "CPlayer.h"
 
 void CInGame::Initialize()
@@ -16,14 +17,18 @@ void CInGame::Initialize()
 
 
     m_pPlayer = (static_cast<CPlayer*>(CObjMgr::GetInstance()->GetObj(OBJ_PLAYER).front()));
+    CEnemyMgr::GetInstance()->Initialize();
 }
 
 void CInGame::Update()
 {
+    CEnemyMgr::GetInstance()->SetPlayerInfo(*(m_pPlayer->GetInfo()));
+    CEnemyMgr::GetInstance()->Update();
 }
 
 void CInGame::LateUpdate()
 {
+    CEnemyMgr::GetInstance()->LateUpdate();
 }
 
 void CInGame::Render(HDC hDC)
@@ -64,8 +69,11 @@ void CInGame::Render(HDC hDC)
         DrawTextW(hDC, szShield, -1, &m_rcUI[HUD_SHIELD_BAR], DT_CENTER | DT_VCENTER | DT_SINGLELINE);
     }
 
+    CEnemyMgr::GetInstance()->Render(hDC);
+
 }
 
 void CInGame::Release()
 {
+    CEnemyMgr::DestroyInstance();
 }

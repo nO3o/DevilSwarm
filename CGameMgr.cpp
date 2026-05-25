@@ -4,6 +4,7 @@
 #include "CAFObj.h"
 #include "CObjMgr.h"
 #include "CSceneMgr.h"
+#include "CEnemyMgr.h"
 #include "CPlayer.h"
 
 IMPLEMENT_SINGLETON(CGameMgr)
@@ -33,6 +34,7 @@ void CGameMgr::Update()
 {
 	CSceneMgr::GetInstance()->Update();
 	CObjMgr::GetInstance()->Update();
+	CEnemyMgr::GetInstance()->Update();
 }
 
 void CGameMgr::LateUpdate()
