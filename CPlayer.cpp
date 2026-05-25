@@ -96,10 +96,13 @@ void CPlayer::KeyInput()
 	if (GetAsyncKeyState(VK_SPACE)) {
 		if (m_fAttackTimer <= 0.f) {
 
-			CObj* pBullet = CreateBullet<CBullet>();
-			if (pBullet != nullptr)
+			for (int i = 0; i < m_iLevel; ++i)
 			{
-				CObjMgr::GetInstance()->AddObject(OBJ_PLAYER_BULLET, pBullet);
+				CObj* pBullet = CreateBullet<CBullet>(OBJ_PLAYER_BULLET);
+				if (pBullet != nullptr)
+				{
+					CObjMgr::GetInstance()->AddObject(OBJ_PLAYER_BULLET, pBullet);
+				}
 			}
 			m_fAttackTimer = m_fAttackDelay;
 		}
@@ -143,6 +146,7 @@ bool CPlayer::IncreaseEXP(float EXP) {
 		m_iLevel += 1;
 		m_fEXP = 0.f;
 		m_fMaxEXP *= 1.2f;
+		RestoreHP();
 		return true;
 	}
 	return false;

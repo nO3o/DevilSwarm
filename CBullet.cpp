@@ -9,8 +9,14 @@ CBullet::~CBullet() { Release(); }
 
 void CBullet::Initialize()
 {
-    m_tInfo.fCX = 8.f;
-    m_tInfo.fCY = 8.f;
+    if (m_eType != OBJ_ENEMY_BULLET) {
+        m_tInfo.fCX = 12.f;
+        m_tInfo.fCY = 12.f;
+    }
+    else {
+        m_tInfo.fCX = 8.f;
+        m_tInfo.fCY = 8.f;
+    }
     m_fSpeed = 4.f;
     m_bDead = false;
 }

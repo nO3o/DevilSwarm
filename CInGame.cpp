@@ -61,11 +61,9 @@ void CInGame::Update()
 				m_pPlayer->ResetKillCount(); 
 				m_iKillCount = 0;    
 
-				if (iCurrentWave == 2) 
-					m_iMaxKillCount = 15 * iCurrentWave;
+			
+				m_iMaxKillCount = 15 * iCurrentWave;
 
-				else if (iCurrentWave == 3) 
-					m_iMaxKillCount = 15 * iCurrentWave;
 			}
 			else if (iCurrentWave == 3)
 				SpawnBoss();
@@ -75,9 +73,14 @@ void CInGame::Update()
 
 	CObjMgr::GetInstance()->Update();
 
-	if (m_bBossSpawned && (CObjMgr::GetInstance()->GetObjList(OBJ_BOSS).empty() || CObjMgr::GetInstance()->GetObjList(OBJ_BOSS).front()->GetDead()))
+	if (m_bBossSpawned) 
 	{
-		CGameMgr::GetInstance()->SetState(GS_CLEAR);
+		const auto& BossList = CObjMgr::GetInstance()->GetObjList(OBJ_BOSS);
+
+		if (CObjMgr::GetInstance()->GetObjList(OBJ_BOSS).empty() || CObjMgr::GetInstance()->GetObjList(OBJ_BOSS).front()->GetDead())
+		{
+			CGameMgr::GetInstance()->SetState(GS_CLEAR);
+		}
 	}
 }
 
@@ -99,8 +102,8 @@ void CInGame::Render(HDC hDC)
 		DrawTextW(hDC, szWave, -1, &rcWave, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 
 		WCHAR szKill[32];
-		swprintf_s(szKill, L"KILL : %d / 15", m_pPlayer->GetKillCount());
-		RECT rcKill = { 450, 65, 600, 100 };
+		swprintf_s(szKill, L"KILL : %d / %d", m_iKillCount, m_iMaxKillCount);
+		RECT rcKill = { 450, 65, 650, 100 };
 		DrawTextW(hDC, szKill, -1, &rcKill, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 	}
 

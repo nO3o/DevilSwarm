@@ -39,16 +39,18 @@ public:
 
 public:
     template<typename T>
-    CObj* CreateBullet()
+    CObj* CreateBullet(OBJID ID)
     {
         CObj* pObj = CAFObj<T>::Create();
         if (pObj)
         {
+            CBullet* pBullet = static_cast<CBullet*>(pObj);
+            pBullet->SetVelocity(0.f, -3.5f);
+            pBullet->SetType(ID);
+
             pObj->Initialize();
             pObj->SetPos(m_tInfo.fX, m_tInfo.fY - 20.f);
 
-            CBullet* pBullet = static_cast<CBullet*>(pObj);
-            pBullet->SetVelocity(0.f, -3.5f);
         }
         return pObj;
     }

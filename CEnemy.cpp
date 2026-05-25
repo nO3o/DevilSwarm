@@ -100,12 +100,13 @@ void CEnemy::FireStraight(float fPlayerX, float fPlayerY)
     float fDst = sqrtf(fDX * fDX + fDY * fDY);
     if (fDst < 1.f) return;
 
-    CBullet* pB = new CBullet;
-    pB->Initialize();
-    pB->SetPos(m_tInfo.fX, m_tInfo.fY);
-    pB->SetVelocity((fDX / fDst) * 2.2f, (fDY / fDst) * 2.2f);
+    CBullet* pBullet = new CBullet;
+    static_cast<CBullet*>(pBullet)->SetType(OBJ_ENEMY_BULLET);
+    pBullet->Initialize();
+    pBullet->SetPos(m_tInfo.fX, m_tInfo.fY);
+    pBullet->SetVelocity((fDX / fDst) * 2.2f, (fDY / fDst) * 2.2f);
 
-    CObjMgr::GetInstance()->AddObject(OBJ_ENEMY_BULLET, pB);
+    CObjMgr::GetInstance()->AddObject(OBJ_ENEMY_BULLET, pBullet);
 }
 
 void CEnemy::FireSpread8()
@@ -113,12 +114,13 @@ void CEnemy::FireSpread8()
     float fAng = (3.141592f * 2.f / 8.f) * m_iSpreadIdx;
     m_iSpreadIdx = (m_iSpreadIdx + 1) % 8;
 
-    CBullet* pB = new CBullet;
-    pB->Initialize();
-    pB->SetPos(m_tInfo.fX, m_tInfo.fY);
-    pB->SetVelocity(cosf(fAng) * 1.8f, sinf(fAng) * 1.8f);
+    CBullet* pBullet = new CBullet;
+    static_cast<CBullet*>(pBullet)->SetType(OBJ_ENEMY_BULLET);
+    pBullet->Initialize();
+    pBullet->SetPos(m_tInfo.fX, m_tInfo.fY);
+    pBullet->SetVelocity(cosf(fAng) * 1.8f, sinf(fAng) * 1.8f);
 
-    CObjMgr::GetInstance()->AddObject(OBJ_ENEMY_BULLET, pB);
+    CObjMgr::GetInstance()->AddObject(OBJ_ENEMY_BULLET, pBullet);
 }
 
 void CEnemy::LateUpdate()

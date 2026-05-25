@@ -16,8 +16,10 @@ public:
 
 public:
     void SetVelocity(float fVX, float fVY) { m_fVX = fVX; m_fVY = fVY; }
+    void SetType(OBJID ID) { m_eType = ID; }
 
 private:
+    OBJID m_eType;
     float m_fVX;
     float m_fVY;
 };
