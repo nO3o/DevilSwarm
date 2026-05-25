@@ -1,30 +1,27 @@
 #pragma once
-class CReward {
+#include "CObj.h"
+
+class CReward : public CObj {
 public:
-	CReward();
-	~CReward();
+    CReward();
+    virtual ~CReward();
 
 public:
-	void Initialize(REWARD_TYPE eType, float fX, float fY, int iValue);
-	void Update();
-	void LateUpdate();
-	void Render(HDC hDC);
-	void Release();
+    virtual void Initialize() override;
+    virtual int  Update() override;
+    virtual void LateUpdate() override;
+    virtual void Render(HDC hDC) override;
+    virtual void Release() override;
 
 public:
-	bool        IsAlive()  const { return m_bAlive; }
-	REWARD_TYPE GetType()  const { return m_eType; }
-	int         GetValue() const { return m_iValue; }
-	INFO        GetInfo()  const { return m_tInfo; }
-
-	void Collect() { m_bAlive = false; } 
+    void SetRewardInfo(REWARD_TYPE eType, float fVal);
+    REWARD_TYPE GetRewardType() const { return m_eType; }
+    float GetSoulValue() const { return m_fValue; }
 
 private:
-	INFO        m_tInfo;
-	REWARD_TYPE m_eType;
-	int         m_iValue; 
-	bool        m_bAlive;
-	DWORD       m_dwExpire;
-	float       m_fBob;
+    REWARD_TYPE m_eType;
+    float       m_fValue;
+    DWORD       m_dwExpireTick;
+    float       m_fDirX;
+    float       m_fDirY;
 };
-

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CObj.h"
 
-CObj::CObj(): m_iHP(0), m_iMaxHP(0),m_iAttack(10), m_bDead(false), m_fSpeed(0.f), m_pObj(nullptr)
+CObj::CObj() : m_bDead(false), m_fSpeed(0.f), m_fAngle(0.f), m_iHP(0), m_iMaxHP(0)
 {
 	ZeroMemory(&m_tInfo, sizeof(INFO));
 	ZeroMemory(&m_tRect, sizeof(RECT));
@@ -11,7 +11,8 @@ CObj::~CObj()
 {
 }
 
-void CObj::UpdateRect() {
+void CObj::UpdateRect()
+{
 	m_tRect.left = LONG(m_tInfo.fX - (m_tInfo.fCX / 2.f));
 	m_tRect.top = LONG(m_tInfo.fY - (m_tInfo.fCY / 2.f));
 	m_tRect.right = LONG(m_tInfo.fX + (m_tInfo.fCX / 2.f));

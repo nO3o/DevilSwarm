@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "CPlayer.h"
 #include "CObjMgr.h"
-#include "CAFObj.h"
 #include "CBullet.h"
 
 CPlayer::CPlayer()
-	:m_iLevel(1), m_fEXP(0.f), m_fMaxEXP(100.f),
-	m_iShild(0), m_fAttackDelay(0.f), m_fAttackTimer(0.f)
+	: m_iLevel(1), m_fEXP(0.f), m_fMaxEXP(100.f)
+	, m_iShild(0), m_fAttackDelay(0.f), m_fAttackTimer(0.f)
 {
 	m_iMaxHP = 300;
 }
@@ -27,8 +26,17 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (m_bDead) return 1;
 
-	const float fDelta = 0.01f; // 10ms
+	if (m_iHP <= 0) {
+		m_iHP = 0;
+		m_bDead = true;
+	}
+	if (m_iShild < 0) {
+		m_iShild = 0;
+	}
+
+	const float fDelta = 0.2f;
 
 	if (m_fAttackTimer > 0.f) {
 		m_fAttackTimer -= fDelta;
@@ -37,18 +45,19 @@ int CPlayer::Update()
 	}
 
 	__super::UpdateRect();
-	return NOEVENT;
-
+	return 0;
 }
 
 void CPlayer::LateUpdate()
 {
+	if (m_bDead) return;
+
 	KeyInput();
 
 	if (m_tRect.left < 0.f)
 	{
 		float fOverlapWidth = 0.f - m_tRect.left;
-		m_tInfo.fX += fOverlapWidth; 
+		m_tInfo.fX += fOverlapWidth;
 	}
 
 	if (m_tRect.right > 800.f)
@@ -72,6 +81,8 @@ void CPlayer::LateUpdate()
 
 void CPlayer::Render(HDC hDC)
 {
+	if (m_bDead) return;
+
 	Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
@@ -83,23 +94,18 @@ void CPlayer::KeyInput()
 {
 	if (GetAsyncKeyState(VK_SPACE)) {
 		if (m_fAttackTimer <= 0.f) {
-			CObjMgr::GetInstance()->AddObject(OBJ_BULLET, CreateBullet<CBullet>());
+
+			CObj* pBullet = CreateBullet<CBullet>();
+			if (pBullet != nullptr)
+			{
+				CObjMgr::GetInstance()->AddObject(OBJ_PLAYER_BULLET, pBullet);
+			}
 			m_fAttackTimer = m_fAttackDelay;
 		}
 	}
-	else if (GetAsyncKeyState(VK_SHIFT)) {
-
-	}
-	else if (GetAsyncKeyState('C')) {
-
-	}
-	else if (GetAsyncKeyState(VK_ESCAPE)) {
-	}
 
 	if (GetAsyncKeyState(VK_RIGHT)) {
-
 		if (GetAsyncKeyState(VK_UP)) {
-
 			m_tInfo.fX += m_fSpeed / sqrtf(2.f);
 			m_tInfo.fY -= m_fSpeed / sqrtf(2.f);
 		}
@@ -111,7 +117,6 @@ void CPlayer::KeyInput()
 			m_tInfo.fX += m_fSpeed;
 	}
 	else if (GetAsyncKeyState(VK_LEFT)) {
-
 		if (GetAsyncKeyState(VK_UP)) {
 			m_tInfo.fX -= m_fSpeed / sqrtf(2.f);
 			m_tInfo.fY -= m_fSpeed / sqrtf(2.f);
@@ -131,7 +136,6 @@ void CPlayer::KeyInput()
 }
 
 bool CPlayer::IncreaseEXP(float EXP) {
-
 	m_fEXP += EXP;
 
 	if (m_fEXP >= m_fMaxEXP) {
@@ -140,18 +144,5 @@ bool CPlayer::IncreaseEXP(float EXP) {
 		m_fMaxEXP *= 1.2f;
 		return true;
 	}
-
 	return false;
 }
-
-template<typename T>
-CObj* CPlayer::CreateBullet()
-{
-	CObj* pBullet = CAFObj<T>::Create();
-
-	pBullet->SetPos(m_tInfo.fX, m_tInfo.fY);
-	pBullet->SetAngle(m_fAngle);
-
-	return pBullet;
-}
-

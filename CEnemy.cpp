@@ -1,166 +1,147 @@
 #include "pch.h"
 #include "CEnemy.h"
+#include "CBullet.h"
+#include "CObjMgr.h"
 
 CEnemy::CEnemy()
-	: m_eType(ET_STRAIGHT)
-	, m_iHP(40), m_iMaxHP(40)
-	, m_fSpeed(2.f), m_fAngle(0.f)
-	, m_bAlive(true)
-	, m_dwFireTick(0), m_bFireReq(false)
-	, m_iSpreadIdx(0)
+    : m_eType(ET_STRAIGHT), m_dwFireTick(0), m_iSpreadIdx(0)
 {
-	m_tInfo = { 0.f, 0.f, 36.f, 36.f };
-	m_tPendingBlt = { 0.f, 0.f, 0.f, 0.f, false, false };
+    m_tInfo = { 0.f, 0.f, 36.f, 36.f };
 }
 
-CEnemy::~CEnemy() {}
+CEnemy::~CEnemy() { Release(); }
 
-void CEnemy::Initialize(ENEMY_TYPE eType, float fX, float fY)
+void CEnemy::Initialize()
 {
-	m_eType = eType;
-	m_tInfo.fX = fX;
-	m_tInfo.fY = fY;
-
-	switch (eType) {
-	case ET_STRAIGHT: m_iMaxHP = 40;  m_fSpeed = 2.f;  break;
-	case ET_ZIGZAG:   m_iMaxHP = 60;  m_fSpeed = 2.5f; break;
-	case ET_DRONE:    m_iMaxHP = 30;  m_fSpeed = 3.5f; break;
-	case ET_ELITE:    m_iMaxHP = 200; m_fSpeed = 1.5f; break;
-	default: break;
-	}
-	m_iHP = m_iMaxHP;
+    m_bDead = false;
+    m_dwFireTick = GetTickCount();
 }
 
-void CEnemy::Update(float fPlayerX, float fPlayerY)
+void CEnemy::Initialize(ENEMY_TYPE eType)
 {
-	if (!m_bAlive) return;
+    m_bDead = false;
+    m_dwFireTick = GetTickCount();
+    SetEnemyType(eType);
+}
 
-	switch (m_eType) {
-	case ET_STRAIGHT:
-		m_tInfo.fY += m_fSpeed;
-		break;
-	case ET_ZIGZAG:
-		m_fAngle += 0.08f;
-		m_tInfo.fY += m_fSpeed;
-		m_tInfo.fX += sinf(m_fAngle) * 3.f;
-		break;
-	case ET_DRONE: {
-		float fDX = fPlayerX - m_tInfo.fX;
-		float fDY = fPlayerY - m_tInfo.fY;
-		float fDist = sqrtf(fDX * fDX + fDY * fDY);
-		if (fDist > 1.f) {
-			m_tInfo.fX += (fDX / fDist) * m_fSpeed;
-			m_tInfo.fY += (fDY / fDist) * m_fSpeed;
-		}
-		break;
-	}
-	case ET_ELITE:
-		m_tInfo.fY += m_fSpeed;
-		break;
-	default: break;
-	}
+void CEnemy::SetEnemyType(ENEMY_TYPE eType)
+{
+    m_eType = eType;
+    switch (eType) {
+    case ET_STRAIGHT: m_iMaxHP = 40;  m_fSpeed = 0.8f;  break;
+    case ET_ZIGZAG:   m_iMaxHP = 60;  m_fSpeed = 1.0f;  break;
+    case ET_DRONE:    m_iMaxHP = 30;  m_fSpeed = 1.2f;  break;
+    case ET_ELITE:    m_iMaxHP = 200; m_fSpeed = 0.5f;  break;
+    default: break;
+    }
+    m_iHP = m_iMaxHP;
+}
 
-	if (m_tInfo.fY > WINCY + 60.f ||
-		m_tInfo.fX < -60.f || m_tInfo.fX > WINCX + 60.f)
-		m_bAlive = false;
+int CEnemy::Update()
+{
+    if (m_bDead) return 1;
 
-	m_bFireReq = false;
-	DWORD dwNow = GetTickCount();
-	if (dwNow - m_dwFireTick > 2000) {
-		m_dwFireTick = dwNow;
-		switch (m_eType) {
-		case ET_STRAIGHT:
-		case ET_ZIGZAG:
-			FireStraight(fPlayerX, fPlayerY);
-			break;
-		case ET_ELITE:
-			FireSpread8();
-			break;
-		default: break;
-		}
-	}
+    CObj* pPlayer = CObjMgr::GetInstance()->GetPlayer();
+    float fPlX = 400.f, fPlY = 500.f;
+    if (pPlayer) {
+        fPlX = pPlayer->GetInfo()->fX;
+        fPlY = pPlayer->GetInfo()->fY;
+    }
+
+    switch (m_eType) {
+    case ET_STRAIGHT:
+        m_tInfo.fY += m_fSpeed;
+        break;
+    case ET_ZIGZAG:
+        m_fAngle += 0.04f;
+        m_tInfo.fY += m_fSpeed;
+        m_tInfo.fX += sinf(m_fAngle) * 2.0f;
+        break;
+    case ET_DRONE: {
+        float fDX = fPlX - m_tInfo.fX;
+        float fDY = fPlY - m_tInfo.fY;
+        float fDist = sqrtf(fDX * fDX + fDY * fDY);
+        if (fDist > 1.f) {
+            m_tInfo.fX += (fDX / fDist) * m_fSpeed;
+            m_tInfo.fY += (fDY / fDist) * m_fSpeed;
+        }
+        break;
+    }
+    case ET_ELITE:
+        m_tInfo.fY += m_fSpeed;
+        break;
+    }
+
+    if (m_tInfo.fY > 600.f + 60.f || m_tInfo.fX < -60.f || m_tInfo.fX > 800.f + 60.f)
+        return 1;
+
+    DWORD dwNow = GetTickCount();
+    if (dwNow - m_dwFireTick > 2500) {
+        m_dwFireTick = dwNow;
+        switch (m_eType) {
+        case ET_STRAIGHT:
+        case ET_ZIGZAG:
+            FireStraight(fPlX, fPlY);
+            break;
+        case ET_ELITE:
+            FireSpread8();
+            break;
+        default: break;
+        }
+    }
+
+    return 0;
 }
 
 void CEnemy::FireStraight(float fPlayerX, float fPlayerY)
 {
-	float fDX = fPlayerX - m_tInfo.fX;
-	float fDY = fPlayerY - m_tInfo.fY;
-	float fDst = sqrtf(fDX * fDX + fDY * fDY);
-	if (fDst < 1.f) return;
+    float fDX = fPlayerX - m_tInfo.fX;
+    float fDY = fPlayerY - m_tInfo.fY;
+    float fDst = sqrtf(fDX * fDX + fDY * fDY);
+    if (fDst < 1.f) return;
 
-	float fSpd = 4.f;
-	m_tPendingBlt.fX = m_tInfo.fX;
-	m_tPendingBlt.fY = m_tInfo.fY;
-	m_tPendingBlt.fVX = (fDX / fDst) * fSpd;
-	m_tPendingBlt.fVY = (fDY / fDst) * fSpd;
-	m_tPendingBlt.bAlive = true;
-	m_tPendingBlt.bFromPlayer = false;
-	m_bFireReq = true;
+    CBullet* pB = new CBullet;
+    pB->Initialize();
+    pB->SetPos(m_tInfo.fX, m_tInfo.fY);
+    pB->SetVelocity((fDX / fDst) * 2.2f, (fDY / fDst) * 2.2f);
+
+    CObjMgr::GetInstance()->AddObject(OBJ_ENEMY_BULLET, pB);
 }
 
 void CEnemy::FireSpread8()
 {
-	float fAng = (PI * 2.f / 8.f) * m_iSpreadIdx;
-	m_iSpreadIdx = (m_iSpreadIdx + 1) % 8;
+    float fAng = (3.141592f * 2.f / 8.f) * m_iSpreadIdx;
+    m_iSpreadIdx = (m_iSpreadIdx + 1) % 8;
 
-	m_tPendingBlt.fX = m_tInfo.fX;
-	m_tPendingBlt.fY = m_tInfo.fY;
-	m_tPendingBlt.fVX = cosf(fAng) * 3.5f;
-	m_tPendingBlt.fVY = sinf(fAng) * 3.5f;
-	m_tPendingBlt.bAlive = true;
-	m_tPendingBlt.bFromPlayer = false;
-	m_bFireReq = true;
+    CBullet* pB = new CBullet;
+    pB->Initialize();
+    pB->SetPos(m_tInfo.fX, m_tInfo.fY);
+    pB->SetVelocity(cosf(fAng) * 1.8f, sinf(fAng) * 1.8f);
+
+    CObjMgr::GetInstance()->AddObject(OBJ_ENEMY_BULLET, pB);
 }
 
-BULLET CEnemy::GetPendingBullet()
+void CEnemy::LateUpdate()
 {
-	m_bFireReq = false;
-	return m_tPendingBlt;
+    UpdateRect();
 }
-
-void CEnemy::TakeDamage(int iDmg)
-{
-	m_iHP -= iDmg;
-	if (m_iHP <= 0) {
-		m_iHP = 0;
-		m_bAlive = false;
-	}
-}
-
-void CEnemy::LateUpdate() {}
 
 void CEnemy::Render(HDC hDC)
 {
-	if (!m_bAlive) return;
+    Ellipse(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 
-	int iL = (int)(m_tInfo.fX - m_tInfo.fCX * 0.5f);
-	int iT = (int)(m_tInfo.fY - m_tInfo.fCY * 0.5f);
-	int iR = (int)(m_tInfo.fX + m_tInfo.fCX * 0.5f);
-	int iB = (int)(m_tInfo.fY + m_tInfo.fCY * 0.5f);
+    TCHAR szHp[32];
+    wsprintf(szHp, TEXT("%d/%d"), m_iHP, m_iMaxHP);
+    TextOut(hDC, (int)m_tInfo.fX - 16, m_tRect.top - 15, szHp, lstrlen(szHp));
 
-	SelectObject(hDC, GetStockObject(NULL_BRUSH));
-	Ellipse(hDC, iL, iT, iR, iB);
-
-	int iBarL = iL;
-	int iBarT = iT - 10;
-	int iBarR = iR;
-	int iBarB = iT - 3;
-	SelectObject(hDC, GetStockObject(NULL_BRUSH));
-	Rectangle(hDC, iBarL, iBarT, iBarR, iBarB);
-
-	int iFilledR = iBarL + (int)((float)(iBarR - iBarL) * (float)m_iHP / (float)m_iMaxHP);
-	SelectObject(hDC, GetStockObject(BLACK_BRUSH));
-	Rectangle(hDC, iBarL, iBarT, iFilledR, iBarB);
-
-	const TCHAR* pLabel = TEXT("N");
-	switch (m_eType) {
-	case ET_STRAIGHT: pLabel = TEXT("S"); break;
-	case ET_ZIGZAG:   pLabel = TEXT("Z"); break;
-	case ET_DRONE:    pLabel = TEXT("D"); break;
-	case ET_ELITE:    pLabel = TEXT("E"); break;
-	default: break;
-	}
-	TextOut(hDC, (int)m_tInfo.fX - 4, (int)m_tInfo.fY - 6, pLabel, lstrlen(pLabel));
+    const TCHAR* pLabel = TEXT("N");
+    switch (m_eType) {
+    case ET_STRAIGHT: pLabel = TEXT("A형"); break;
+    case ET_ZIGZAG:   pLabel = TEXT("B형"); break;
+    case ET_DRONE:    pLabel = TEXT("자폭"); break;
+    case ET_ELITE:    pLabel = TEXT("정예"); break;
+    }
+    TextOut(hDC, (int)m_tInfo.fX - 14, (int)m_tInfo.fY - 6, pLabel, lstrlen(pLabel));
 }
 
 void CEnemy::Release() {}

@@ -10,7 +10,6 @@ CEnemyMgr::CEnemyMgr()
 	, m_bBossSpawned(false)
 	, m_bPlayerHit(false), m_dwHitMsgTick(0)
 {
-	m_tPlayerInfo = { 400.f, 500.f, 40.f, 40.f };
 	m_szHitMsg[0] = TEXT('\0');
 }
 CEnemyMgr::~CEnemyMgr() {}
@@ -37,14 +36,14 @@ void CEnemyMgr::Update()
 
 	for (auto& pEnemy : m_EnemyList) {
 		if (!pEnemy->IsAlive()) continue;
-		pEnemy->Update(m_tPlayerInfo.fX, m_tPlayerInfo.fY);
+		pEnemy->Update(m_pPlayer->fX, m_pPlayer->fY);
 
 		if (pEnemy->HasPendingBullet())
 			m_BulletList.push_back(pEnemy->GetPendingBullet());
 	}
 
 	if (m_pBoss && m_pBoss->IsAlive()) {
-		m_pBoss->Update(m_tPlayerInfo.fX, m_tPlayerInfo.fY);
+		m_pBoss->Update(m_pPlayer->fX, m_pPlayer->fY);
 
 		for (auto& b : m_pBoss->GetNewBullets())
 			m_BulletList.push_back(b);
@@ -118,11 +117,11 @@ void CEnemyMgr::UpdateBullets()
 
 void CEnemyMgr::CheckBulletHitPlayer()
 {
-	float fPR = m_tPlayerInfo.fCX * 0.4f;  
+	float fPR = m_pPlayer->fCX * 0.4f;
 	for (auto& b : m_BulletList) {
 		if (!b.bAlive || b.bFromPlayer) continue;
 		if (IsCircleOverlap(b.fX, b.fY, 5.f,
-			m_tPlayerInfo.fX, m_tPlayerInfo.fY, fPR)) {
+			m_pPlayer->fX, m_pPlayer->fY, fPR)) {
 			b.bAlive = false;
 			m_bPlayerHit = true;
 			m_dwHitMsgTick = GetTickCount();
@@ -201,11 +200,12 @@ void CEnemyMgr::LateUpdate() {}
 
 void CEnemyMgr::Render(HDC hDC)
 {
+
 	for (auto& pEnemy : m_EnemyList)
 		pEnemy->Render(hDC);
 
-	SelectObject(hDC, GetStockObject(BLACK_BRUSH));
-	for (auto& b : m_BulletList) {
+	for (auto& b : m_BulletList)
+	{
 		if (!b.bAlive) continue;
 		int iX = (int)b.fX, iY = (int)b.fY;
 		Ellipse(hDC, iX - 4, iY - 4, iX + 4, iY + 4);
@@ -218,12 +218,12 @@ void CEnemyMgr::Render(HDC hDC)
 		pReward->Render(hDC);
 
 	TCHAR szInfo[64];
-	wsprintf(szInfo, TEXT("WAVE:%d  KILL:%d  GOLD:%d"), m_iWave, m_iKillCount, m_iGold);
+	wsprintf(szInfo, TEXT("WAVE:%d KILL:%d GOLD:%d"), m_iWave, m_iKillCount, m_iGold);
 	TextOut(hDC, 10, 10, szInfo, lstrlen(szInfo));
 
-	if (m_bPlayerHit) {
-		TextOut(hDC, (int)m_tPlayerInfo.fX - 16, (int)m_tPlayerInfo.fY - 30,
-			m_szHitMsg, lstrlen(m_szHitMsg));
+	if (m_bPlayerHit)
+	{
+		TextOut(hDC, (int)m_pPlayer->fX - 16, (int)m_pPlayer->fY - 30, m_szHitMsg, lstrlen(m_szHitMsg));
 		if (GetTickCount() - m_dwHitMsgTick > 600)
 			m_bPlayerHit = false;
 	}

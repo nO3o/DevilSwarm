@@ -16,23 +16,50 @@
     <Filter Include="소스 파일\core">
       <UniqueIdentifier>{9a3ced71-81d4-4e91-829d-4b3b349f1dd6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Singleton">
-      <UniqueIdentifier>{d6db41c4-7d80-4438-a080-1acab69151ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Singleton\GameMgr">
-      <UniqueIdentifier>{fa35d1de-0f3a-424d-ae2e-fa0cd49278d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Objects">
       <UniqueIdentifier>{bfc194f5-e788-444b-ae97-7fa615561b43}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\Objects\Player">
       <UniqueIdentifier>{fd0faf16-2b0a-41e7-86a3-8b5a4cab8440}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Singleton\ObjMgr">
-      <UniqueIdentifier>{48e1777f-74c1-4831-b4d5-f7f8d2364ffa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Objects\Bullet">
       <UniqueIdentifier>{9e5e5490-e22c-4c6c-98e9-804dcdf29b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Mgr">
+      <UniqueIdentifier>{d6db41c4-7d80-4438-a080-1acab69151ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Mgr\GameMgr">
+      <UniqueIdentifier>{fa35d1de-0f3a-424d-ae2e-fa0cd49278d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Mgr\ObjMgr">
+      <UniqueIdentifier>{48e1777f-74c1-4831-b4d5-f7f8d2364ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Mgr\SceneMgr">
+      <UniqueIdentifier>{cac0f8fd-c02a-41d4-8a66-648c57a67e6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Mgr\CollisionMgr">
+      <UniqueIdentifier>{1a85b0a3-6afa-434b-a8a1-9c06abfa6fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scene">
+      <UniqueIdentifier>{b7af24bb-637b-4b70-ab38-b6899dac7c73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scene\InGame">
+      <UniqueIdentifier>{3e1fa8f4-2443-426d-a205-4b01d3e10208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scene\Title">
+      <UniqueIdentifier>{9043e75d-eec6-4b4c-a2f8-15a9fcf5625d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scene\Win">
+      <UniqueIdentifier>{1092ca0a-76a0-4cf1-accd-220dc299b9b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Enemy">
+      <UniqueIdentifier>{e3086049-338b-43f7-ae0b-74b3abc0de92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Design">
+      <UniqueIdentifier>{948e678f-6bc1-4666-85d9-106322ac0df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects\Reward">
+      <UniqueIdentifier>{2882e4ae-f52c-4b4d-ae0d-524aeb5a0d55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,12 +72,6 @@
     <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="DevilSwarm.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GameType.h">
       <Filter>소스 파일\core</Filter>
     </ClInclude>
@@ -58,10 +79,7 @@
       <Filter>소스 파일\core</Filter>
     </ClInclude>
     <ClInclude Include="CGameMgr.h">
-      <Filter>소스 파일\Singleton\GameMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>소스 파일\Singleton</Filter>
+      <Filter>소스 파일\Mgr\GameMgr</Filter>
     </ClInclude>
     <ClInclude Include="CObj.h">
       <Filter>소스 파일\Objects</Filter>
@@ -70,24 +88,54 @@
       <Filter>소스 파일\Objects\Player</Filter>
     </ClInclude>
     <ClInclude Include="CObjMgr.h">
-      <Filter>소스 파일\Singleton\ObjMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="CAbstractFactory.h">
-      <Filter>소스 파일\Objects</Filter>
+      <Filter>소스 파일\Mgr\ObjMgr</Filter>
     </ClInclude>
     <ClInclude Include="CBullet.h">
       <Filter>소스 파일\Objects\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="CSceneMgr.h">
+      <Filter>소스 파일\Mgr\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>소스 파일\Mgr\CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>소스 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="DevilSwarm.h">
+      <Filter>소스 파일\core</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneBase.h">
+      <Filter>소스 파일\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CInGame.h">
+      <Filter>소스 파일\Scene\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="CTitle.h">
+      <Filter>소스 파일\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="CWin.h">
+      <Filter>소스 파일\Scene\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemy.h">
+      <Filter>소스 파일\Objects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoss.h">
+      <Filter>소스 파일\Objects\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CAFObj.h">
+      <Filter>소스 파일\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>소스 파일\Design</Filter>
+    </ClInclude>
+    <ClInclude Include="CReward.h">
+      <Filter>소스 파일\Objects\Reward</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DevilSwarm.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CGameMgr.cpp">
-      <Filter>소스 파일\Singleton\GameMgr</Filter>
+      <Filter>소스 파일\Mgr\GameMgr</Filter>
     </ClCompile>
     <ClCompile Include="CObj.cpp">
       <Filter>소스 파일\Objects</Filter>
@@ -96,10 +144,43 @@
       <Filter>소스 파일\Objects\Player</Filter>
     </ClCompile>
     <ClCompile Include="CObjMgr.cpp">
-      <Filter>소스 파일\Singleton\ObjMgr</Filter>
+      <Filter>소스 파일\Mgr\ObjMgr</Filter>
     </ClCompile>
     <ClCompile Include="CBullet.cpp">
       <Filter>소스 파일\Objects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneMgr.cpp">
+      <Filter>소스 파일\Mgr\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>소스 파일\Mgr\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="DevilSwarm.cpp">
+      <Filter>소스 파일\core</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\core</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneBase.cpp">
+      <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CInGame.cpp">
+      <Filter>소스 파일\Scene\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="CTitle.cpp">
+      <Filter>소스 파일\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="CWin.cpp">
+      <Filter>소스 파일\Scene\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemy.cpp">
+      <Filter>소스 파일\Objects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoss.cpp">
+      <Filter>소스 파일\Objects\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CReward.cpp">
+      <Filter>소스 파일\Objects\Reward</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

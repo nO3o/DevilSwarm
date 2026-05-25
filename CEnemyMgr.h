@@ -18,7 +18,7 @@ public:
 	void Render(HDC hDC);
 	void Release();
 public:
-	void SetPlayerInfo(const INFO& tInfo) { m_tPlayerInfo = tInfo; }
+	void SetPlayerInfo(INFO* pInfo) { m_pPlayer = pInfo; }
 
 	int  GetKillCount() const { return m_iKillCount; }
 	int  GetGold()      const { return m_iGold; }
@@ -47,7 +47,7 @@ private:
 	CBoss* m_pBoss;
 	std::vector<CReward*> m_vecReward;
 
-	INFO   m_tPlayerInfo;
+	INFO*   m_pPlayer;
 
 	int    m_iWave;         // 현재 웨이브 번호
 	int    m_iKillCount;    // 격추 수

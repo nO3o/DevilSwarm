@@ -1,17 +1,23 @@
 #pragma once
 #include "CObj.h"
-class CBullet :
-    public CObj
+
+class CBullet : public CObj
 {
 public:
     CBullet();
-    ~CBullet();
+    virtual ~CBullet();
 
 public:
-    void Initialize() override;
-    int Update() override;
-    void LateUpdate() override;
-    void Render(HDC hDC) override;
-    void Release() override;
-};
+    virtual void Initialize() override;
+    virtual int  Update() override;
+    virtual void LateUpdate() override;
+    virtual void Render(HDC hDC) override;
+    virtual void Release() override;
 
+public:
+    void SetVelocity(float fVX, float fVY) { m_fVX = fVX; m_fVY = fVY; }
+
+private:
+    float m_fVX;
+    float m_fVY;
+};

@@ -17,6 +17,10 @@ public:
     void Release() override;
 
 public:
+    void SpawnEnemy();
+    void SpawnBoss();
+
+public:
     enum HUD_INDEX {
         HUD_XP_BAR,
         HUD_LEVEL,
@@ -30,5 +34,10 @@ public:
 
     RECT m_rcUI[HUD_END];
     CPlayer* m_pPlayer;
+
+private:
+    DWORD m_dwSpawnTick;
+    int m_iKillCount;
+    bool m_bBossSpawned;
 };
 

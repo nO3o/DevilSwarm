@@ -4,6 +4,7 @@
 #include "CSceneBase.h"
 #include "CTitle.h"
 #include "CInGame.h"
+#include "CWin.h"
 
 
 IMPLEMENT_SINGLETON(CSceneMgr)
@@ -39,8 +40,12 @@ void CSceneMgr::Update() {
 				m_pScene = new CInGame;
 				break;
 
+			case GS_CLEAR:
+				m_pScene = new CWin;
+				break;
+
 		}
-		if (m_pInstance != nullptr) 
+		if (m_pScene !=nullptr)
 			m_pScene->Initialize();
 		
 		m_eNextState = GS_END;
@@ -62,9 +67,13 @@ void CSceneMgr::Render() {
 		m_pScene->Render(m_hDC);
 }
 
-void CSceneMgr::Release() {
-
-	m_pScene->Release();
+void CSceneMgr::Release()
+{
+	if (m_pScene != nullptr)
+	{
+		m_pScene->Release();
+		Safe_Delete(m_pScene);
+	}
 }
 
 void CSceneMgr::CheckState()

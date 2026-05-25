@@ -2,64 +2,91 @@
 #include "CReward.h"
 
 CReward::CReward()
-	: m_eType(RT_GOLD), m_iValue(0)
-	, m_bAlive(false), m_dwExpire(0), m_fBob(0.f)
+    : m_eType(RT_SOUL), m_fValue(0.f), m_dwExpireTick(0)
+    , m_fDirX(0.f), m_fDirY(0.f)
 {
-	m_tInfo = { 0.f, 0.f, 20.f, 20.f };
+    m_tInfo = { 0.f, 0.f, 24.f, 24.f };
 }
+
 CReward::~CReward() {}
 
-void CReward::Initialize(REWARD_TYPE eType, float fX, float fY, int iValue)
+void CReward::Initialize()
 {
-	m_eType = eType;
-	m_tInfo.fX = fX;
-	m_tInfo.fY = fY;
-	m_iValue = iValue;
-	m_bAlive = true;
-	m_dwExpire = GetTickCount();
-	m_fBob = 0.f;
+    m_bDead = false;
+    m_dwExpireTick = GetTickCount();
+    m_fSpeed = 1.5f;
+
+    float fAngle = (float)(rand() % 360) * 3.141592f / 180.f;
+    m_fDirX = cosf(fAngle);
+    m_fDirY = sinf(fAngle);
 }
 
-void CReward::Update()
+void CReward::SetRewardInfo(REWARD_TYPE eType, float fVal)
 {
-	if (!m_bAlive) return;
+    m_eType = eType;
 
-	if (GetTickCount() - m_dwExpire > 30000)
-		m_bAlive = false;
-
-	m_fBob += 0.08f;
-	if (m_fBob > PI * 2.f) m_fBob -= PI * 2.f;
+    switch (eType) {
+    case RT_SOUL:   m_fValue = fVal;        break;
+    case RT_SOUL02: m_fValue = fVal * 1.5f; break;
+    case RT_SOUL03: m_fValue = fVal * 3.f;  break;
+    default:        m_fValue = fVal;        break;
+    }
 }
-void CReward::LateUpdate() {}
+
+int CReward::Update()
+{
+    if (m_bDead) return 1;
+
+    if (GetTickCount() - m_dwExpireTick > 15000)
+        return 1;
+
+    m_tInfo.fX += m_fDirX * m_fSpeed;
+    m_tInfo.fY += m_fDirY * m_fSpeed;
+
+    float fRadiusX = m_tInfo.fCX * 0.5f;
+    float fRadiusY = m_tInfo.fCY * 0.5f;
+
+    if (m_tInfo.fX - fRadiusX < 0.f) {
+        m_tInfo.fX = fRadiusX;
+        m_fDirX = -m_fDirX;
+    }
+    else if (m_tInfo.fX + fRadiusX > WINCX) {
+        m_tInfo.fX = WINCX - fRadiusX;
+        m_fDirX = -m_fDirX;
+    }
+
+    if (m_tInfo.fY - fRadiusY < 0.f) {
+        m_tInfo.fY = fRadiusY;
+        m_fDirY = -m_fDirY;
+    }
+    else if (m_tInfo.fY + fRadiusY > WINCY) {
+        m_tInfo.fY = WINCY - fRadiusY;
+        m_fDirY = -m_fDirY;
+    }
+
+    return 0;
+}
+
+void CReward::LateUpdate()
+{
+    UpdateRect();
+}
 
 void CReward::Render(HDC hDC)
 {
-	if (!m_bAlive) return;
+    Rectangle(hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 
-	float fRenderY = m_tInfo.fY + sinf(m_fBob) * 4.f;  
+    const TCHAR* pLabel = TEXT("S");
+    switch (m_eType) {
+    case RT_SOUL:   pLabel = TEXT("S"); break;
+    case RT_SOUL02: pLabel = TEXT("N"); break;
+    case RT_SOUL03: pLabel = TEXT("B"); break;
+    }
+    TextOut(hDC, m_tRect.left + 5, m_tRect.top + 3, pLabel, lstrlen(pLabel));
 
-	int iL = (int)(m_tInfo.fX - m_tInfo.fCX * 0.5f);
-	int iT = (int)(fRenderY - m_tInfo.fCY * 0.5f);
-	int iR = (int)(m_tInfo.fX + m_tInfo.fCX * 0.5f);
-	int iB = (int)(fRenderY + m_tInfo.fCY * 0.5f);
-
-	SelectObject(hDC, GetStockObject(NULL_BRUSH));
-	Rectangle(hDC, iL, iT, iR, iB);
-
-	const TCHAR* pLabel = TEXT("G");
-	switch (m_eType) {
-	case RT_GOLD:      pLabel = TEXT("G");  break;
-	case RT_ITEM_NORM: pLabel = TEXT("I");  break;
-	case RT_ITEM_RARE: pLabel = TEXT("R!"); break;
-	default: break;
-	}
-	TextOut(hDC, iL + 4, iT + 3, pLabel, lstrlen(pLabel));
-
-	if (m_eType == RT_GOLD) {
-		TCHAR szVal[16];
-		wsprintf(szVal, TEXT("+%d"), m_iValue);
-		TextOut(hDC, iL, iB + 2, szVal, lstrlen(szVal));
-	}
+    TCHAR szVal[32];
+    swprintf_s(szVal, L"+%.0f EXP", m_fValue);
+    TextOut(hDC, m_tRect.left - 15, m_tRect.bottom + 2, szVal, lstrlen(szVal));
 }
 
 void CReward::Release() {}
