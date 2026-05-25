@@ -71,7 +71,11 @@ void CCollisionMgr::CollisionCircleDamage(std::list<CObj*>& DstList, std::list<C
                     Dst->SetDead();
 
                     if (!bIsBoss) {
-                        CObjMgr::GetInstance()->AddKillCount();
+                        CObj* pPlayer = CObjMgr::GetInstance()->GetPlayer();
+
+                        if (pPlayer && !pPlayer->GetDead())
+                            static_cast<CPlayer*>(pPlayer)->AddKillCount();
+
                         CObjMgr::GetInstance()->SpawnReward(Dst->GetInfo()->fX, Dst->GetInfo()->fY, Dst->GetMaxHP(), false);
                     }
                     else if (bIsBoss) {

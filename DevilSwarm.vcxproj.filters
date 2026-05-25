@@ -61,6 +61,9 @@
     <Filter Include="소스 파일\Objects\Reward">
       <UniqueIdentifier>{2882e4ae-f52c-4b4d-ae0d-524aeb5a0d55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Scene\Lose">
+      <UniqueIdentifier>{37ba54a9-27a9-4bee-911c-b95a30c693bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -132,6 +135,9 @@
     <ClInclude Include="CReward.h">
       <Filter>소스 파일\Objects\Reward</Filter>
     </ClInclude>
+    <ClInclude Include="CLose.h">
+      <Filter>소스 파일\Scene\Lose</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CGameMgr.cpp">
@@ -181,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="CReward.cpp">
       <Filter>소스 파일\Objects\Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="CLose.cpp">
+      <Filter>소스 파일\Scene\Lose</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

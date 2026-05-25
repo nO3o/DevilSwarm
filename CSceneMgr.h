@@ -6,7 +6,7 @@ class CSceneMgr {
 DECLARE_SINGLETON(CSceneMgr)
 
 private:
-	CSceneMgr():m_hDC(nullptr), m_pScene(nullptr), m_eNextState(GS_END){}
+	CSceneMgr():m_hDC(nullptr), m_pScene(nullptr),m_ThisState(GS_TITLE), m_eNextState(GS_END){}
 	~CSceneMgr() {}
 
 public:

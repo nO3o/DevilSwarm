@@ -30,6 +30,13 @@ public:
     const int   GetLevel()  const { return m_iLevel; }
     const float GetEXPPer() const { return (m_fEXP / m_fMaxEXP) * 100.f; }
 
+    int GetWave() const { return m_iWave; }
+    void SetWave(int iWave) { m_iWave = iWave; }
+
+    int GetKillCount() const { return m_iKillCount; }
+    void AddKillCount() { ++m_iKillCount; }
+    void ResetKillCount() { m_iKillCount = 0; }
+
 public:
     template<typename T>
     CObj* CreateBullet()
@@ -49,6 +56,8 @@ public:
 private:
     int   m_iLevel;
     int   m_iShild;
+    int   m_iWave;
+    int   m_iKillCount;
     float m_fEXP;
     float m_fMaxEXP;
     float m_fAttackDelay;

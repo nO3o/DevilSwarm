@@ -4,8 +4,9 @@
 #include "CBullet.h"
 
 CPlayer::CPlayer()
-	: m_iLevel(1), m_fEXP(0.f), m_fMaxEXP(100.f)
-	, m_iShild(0), m_fAttackDelay(0.f), m_fAttackTimer(0.f)
+	: m_iLevel(1), m_iWave(1), m_iKillCount(0), m_fEXP(0.f),
+	m_fMaxEXP(100.f), m_iShild(0), m_fAttackDelay(0.f), 
+	m_fAttackTimer(0.f)
 {
 	m_iMaxHP = 300;
 }
@@ -36,7 +37,7 @@ int CPlayer::Update()
 		m_iShild = 0;
 	}
 
-	const float fDelta = 0.2f;
+	const float fDelta = 0.01f;
 
 	if (m_fAttackTimer > 0.f) {
 		m_fAttackTimer -= fDelta;

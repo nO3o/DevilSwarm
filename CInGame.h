@@ -38,6 +38,7 @@ public:
 private:
     DWORD m_dwSpawnTick;
     int m_iKillCount;
+    int m_iMaxKillCount;
     bool m_bBossSpawned;
 };
 

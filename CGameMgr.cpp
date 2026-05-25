@@ -26,19 +26,16 @@ void CGameMgr::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 	CSceneMgr::GetInstance()->Initialize(m_hDC);
-	CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CAFObj<CPlayer>::Create());
 }
 
 void CGameMgr::Update()
 {
 	CSceneMgr::GetInstance()->Update();
-	CObjMgr::GetInstance()->Update();
 }
 
 void CGameMgr::LateUpdate()
 {
 	CSceneMgr::GetInstance()->LateUpdate();
-	CObjMgr::GetInstance()->LateUpdate();
 }
 
 void CGameMgr::Render()

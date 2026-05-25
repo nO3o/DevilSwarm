@@ -22,7 +22,6 @@ public:
     CObj* GetPlayer() { return m_ObjList[OBJ_PLAYER].empty() ? nullptr : m_ObjList[OBJ_PLAYER].front(); }
 
     void AddGold(int iGoldVal) { m_iGold += iGoldVal; }
-    void AddKillCount() { ++m_iKillCount; }
 
 private:
     void SpawnEnemy();
@@ -34,9 +33,6 @@ public:
 private:
     std::list<CObj*> m_ObjList[OBJ_END];
 
-    int    m_iWave;
-    int    m_iKillCount;
     int    m_iGold;
     DWORD  m_dwSpawnTick;
-    bool   m_bBossSpawned;
 };

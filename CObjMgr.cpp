@@ -4,12 +4,13 @@
 #include "CBoss.h"
 #include "CReward.h"
 #include "CCollisionMgr.h"
+#include "CPlayer.h"
 
 IMPLEMENT_SINGLETON(CObjMgr)
 
 CObjMgr::CObjMgr()
-    : m_iWave(1), m_iKillCount(0), m_iGold(0)
-    , m_dwSpawnTick(0), m_bBossSpawned(false)
+    :  m_iGold(0)
+    , m_dwSpawnTick(0)
 {
 }
 
@@ -33,7 +34,13 @@ void CObjMgr::AddObject(OBJID eID, CObj* pObj)
 void CObjMgr::SpawnEnemy()
 {
     int iRand = rand() % 4;
-    if (iRand == 2 && m_iWave < 2) iRand = 0;
+    CObj* pPlayer = GetPlayer();
+    if (pPlayer && !pPlayer->GetDead())
+    {
+        int iPlayerWave = static_cast<CPlayer*>(pPlayer)->GetWave();
+        if (iRand == 2 && iPlayerWave < 2)
+            iRand = 0;
+    }
 
     float fSpawnX = (float)(50 + rand() % (800 - 100));
 
@@ -50,10 +57,8 @@ void CObjMgr::SpawnBoss()
     CBoss* pBoss = new CBoss;
     pBoss->Initialize();
     pBoss->SetPos(400.f, 100.f);
-    m_iWave = 3;
 
     AddObject(OBJ_BOSS, pBoss);
-    m_bBossSpawned = true;
 }
 
 void CObjMgr::SpawnReward(float fX, float fY, int iHpMax, bool bBoss)
@@ -100,15 +105,6 @@ void CObjMgr::SpawnReward(float fX, float fY, int iHpMax, bool bBoss)
 
 void CObjMgr::Update()
 {
-    DWORD dwNow = GetTickCount();
-
-    if (dwNow - m_dwSpawnTick > 1500 && !m_bBossSpawned) {
-        m_dwSpawnTick = dwNow;
-        SpawnEnemy();
-    }
-    if (m_iKillCount >= 15 && !m_bBossSpawned) {
-        SpawnBoss();
-    }
 
     for (size_t i = 0; i < OBJ_END; ++i)
     {
@@ -150,10 +146,6 @@ void CObjMgr::Render(HDC hDC)
         for (auto& pObj : m_ObjList[i])
             pObj->Render(hDC);
     }
-
-    TCHAR szInfo[64];
-    wsprintf(szInfo, TEXT("WAVE:%d KILL:%d GOLD:%d"), m_iWave, m_iKillCount, m_iGold);
-    TextOut(hDC, 10, 10, szInfo, lstrlen(szInfo));
 }
 
 void CObjMgr::Release()

@@ -5,7 +5,7 @@
 #include "CTitle.h"
 #include "CInGame.h"
 #include "CWin.h"
-
+#include "CLose.h"
 
 IMPLEMENT_SINGLETON(CSceneMgr)
 
@@ -17,7 +17,7 @@ void CSceneMgr::Initialize(HDC hDC) {
 		m_pScene->Initialize();
 	}
 
-	GAME_STATE m_ThisState = CGameMgr::GetInstance()->GetState();
+	m_ThisState = CGameMgr::GetInstance()->GetState();
 }
 
 void CSceneMgr::Update() {
@@ -44,8 +44,11 @@ void CSceneMgr::Update() {
 				m_pScene = new CWin;
 				break;
 
+			case GS_GAMEOVER:
+				m_pScene = new CLose;
+				break;
 		}
-		if (m_pScene !=nullptr)
+		if (m_pScene != nullptr)
 			m_pScene->Initialize();
 		
 		m_eNextState = GS_END;
@@ -78,10 +81,11 @@ void CSceneMgr::Release()
 
 void CSceneMgr::CheckState()
 {
-	m_eNextState =  CGameMgr::GetInstance()->GetState();
+	GAME_STATE eCurrentState =  CGameMgr::GetInstance()->GetState();
 
-	if (m_ThisState != m_eNextState) {
-		m_ThisState = m_eNextState;
+	if (m_ThisState != eCurrentState) {
+		m_ThisState = eCurrentState;
+		m_eNextState = eCurrentState;
 	}
 	else
 		m_eNextState = GS_END;

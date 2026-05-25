@@ -1,25 +1,29 @@
 #include "pch.h"
 #include "CTitle.h"
+#include "CAFObj.h"
 #include "CGameMgr.h"
+#include "CObjMgr.h"
+#include "CPlayer.h"
 
 void CTitle::Initialize()
 {
+    CObjMgr::GetInstance()->AddObject(OBJ_PLAYER, CAFObj<CPlayer>::Create());
 }
 
 void CTitle::Update()
 {
 
-	if (GetAsyncKeyState(VK_UP)) {
-        --m_iMenu;
-        if (m_iMenu < 0)
-            m_iMenu = TITLE_MENU::TM_END - 1;
+	if (GetAsyncKeyState(VK_UP) & 0x0001) {
+		--m_iMenu;
+		if (m_iMenu < 0)
+			m_iMenu = TITLE_MENU::TM_END - 1;
 	}
-	else if (GetAsyncKeyState(VK_DOWN)) {
-        ++m_iMenu;
-        if (m_iMenu >= TITLE_MENU::TM_END) m_iMenu = 0;
-
+	else if (GetAsyncKeyState(VK_DOWN) & 0x0001) {
+		++m_iMenu;
+		if (m_iMenu >= TITLE_MENU::TM_END)
+			m_iMenu = 0;
 	}
-	else if (GetAsyncKeyState(VK_RETURN)) {
+	else if (GetAsyncKeyState(VK_RETURN) & 0x0001) {
 		if (m_iMenu == TITLE_MENU::TM_START)
 			CGameMgr::GetInstance()->SetState(GS_INGAME);
 		else
