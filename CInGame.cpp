@@ -47,13 +47,16 @@ void CInGame::Render(HDC hDC)
         DrawTextW(hDC, szLevel, -1, &m_rcUI[HUD_LEVEL], DT_CENTER | DT_VCENTER | DT_SINGLELINE);
     }
 
+    Rectangle(hDC, 0, 540, 800, 600);
+
     if (m_pPlayer != nullptr)
     {
         WCHAR szHp[32];
         swprintf_s(szHp, L"Ã¼·Â %d / %d", m_pPlayer->GetHP(), m_pPlayer->GetMaxHP());
         DrawTextW(hDC, szHp, -1, &m_rcUI[HUD_HP_BAR], DT_CENTER | DT_VCENTER | DT_SINGLELINE);
     }
-
+    MoveToEx(hDC, 400, 540, NULL);
+    LineTo(hDC, 400, 600);
     if (m_pPlayer != nullptr)
     {
         WCHAR szShield[32];

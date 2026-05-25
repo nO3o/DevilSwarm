@@ -43,6 +43,30 @@ int CPlayer::Update()
 void CPlayer::LateUpdate()
 {
 	KeyInput();
+
+	if (m_tRect.left < 0.f)
+	{
+		float fOverlapWidth = 0.f - m_tRect.left;
+		m_tInfo.fX += fOverlapWidth; 
+	}
+
+	if (m_tRect.right > 800.f)
+	{
+		float fOverlapWidth = 800.f - m_tRect.right;
+		m_tInfo.fX += fOverlapWidth;
+	}
+
+	if (m_tRect.top < 0.f)
+	{
+		float fOverlapHeight = m_tRect.top - 0.f;
+		m_tInfo.fY -= fOverlapHeight;
+	}
+
+	if (m_tRect.bottom > 540.f)
+	{
+		float fOverlapHeight = m_tRect.bottom - 540.f;
+		m_tInfo.fY -= fOverlapHeight;
+	}
 }
 
 void CPlayer::Render(HDC hDC)
