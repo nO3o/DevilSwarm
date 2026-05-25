@@ -20,8 +20,9 @@ public:
 
 private:
     REWARD_TYPE m_eType;
-    float       m_fValue;
     DWORD       m_dwExpireTick;
+    float       m_fValue;
     float       m_fDirX;
     float       m_fDirY;
+    int         m_iBounceCount;
 };

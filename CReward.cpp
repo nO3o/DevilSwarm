@@ -3,7 +3,7 @@
 
 CReward::CReward()
     : m_eType(RT_SOUL), m_fValue(0.f), m_dwExpireTick(0)
-    , m_fDirX(0.f), m_fDirY(0.f)
+    , m_fDirX(0.f), m_fDirY(0.f), m_iBounceCount(0)
 {
     m_tInfo = { 0.f, 0.f, 24.f, 24.f };
 }
@@ -40,6 +40,10 @@ int CReward::Update()
     if (GetTickCount() - m_dwExpireTick > 15000)
         return 1;
 
+    if (m_iBounceCount >= 3) {
+        return 1; 
+    }
+
     m_tInfo.fX += m_fDirX * m_fSpeed;
     m_tInfo.fY += m_fDirY * m_fSpeed;
 
@@ -49,19 +53,27 @@ int CReward::Update()
     if (m_tInfo.fX - fRadiusX < 0.f) {
         m_tInfo.fX = fRadiusX;
         m_fDirX = -m_fDirX;
+        ++m_iBounceCount;
     }
     else if (m_tInfo.fX + fRadiusX > WINCX) {
         m_tInfo.fX = WINCX - fRadiusX;
         m_fDirX = -m_fDirX;
+        ++m_iBounceCount;
     }
 
     if (m_tInfo.fY - fRadiusY < 0.f) {
         m_tInfo.fY = fRadiusY;
         m_fDirY = -m_fDirY;
+        ++m_iBounceCount;
     }
     else if (m_tInfo.fY + fRadiusY > WINCY) {
         m_tInfo.fY = WINCY - fRadiusY;
         m_fDirY = -m_fDirY;
+        ++m_iBounceCount;
+    }
+
+    if (m_iBounceCount >= 3) {
+        return 1;
     }
 
     return 0;
