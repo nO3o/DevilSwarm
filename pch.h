@@ -12,6 +12,7 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <string>
 
 #include "Define.h"
 #include "GameType.h"

@@ -2,7 +2,7 @@
 #include "Singleton.h"
 
 class CGameMgr {
-DECLARE_SINGLETON(CGameMgr);
+DECLARE_SINGLETON(CGameMgr)
 
 private:
 	CGameMgr();
@@ -20,6 +20,10 @@ public:
 
 private:
 	HDC m_hDC;
-	STATE m_eState;
+	GAME_STATE m_eState;
+
+public:
+	GAME_STATE GetState() const { return m_eState; }
+	void SetState(GAME_STATE eState) { m_eState = eState; }
 };
 

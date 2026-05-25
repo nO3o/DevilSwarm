@@ -4,7 +4,10 @@
 #include "CAbstractFactory.h"
 #include "CBullet.h"
 
-CPlayer::CPlayer():m_fMaxHP(300), m_fShild(0.f),m_fRageCurrent(0.f), m_fRageMax(100.f), m_fRageRate(0.f), m_fAttackDelay(0.f), m_fAttackTimer(0.f)
+CPlayer::CPlayer()
+	:m_fMaxHP(300), m_fShild(0.f),m_fRageCurrent(0.f),
+	m_fRageMax(100.f), m_fRageRate(0.f), m_fAttackDelay(0.f),
+	m_fAttackTimer(0.f)
 {
 }
 
