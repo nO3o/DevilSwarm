@@ -19,8 +19,8 @@ public:
 
 public:
     void RestoreHP() { m_iHP = m_iMaxHP; }
-    void HealHP(float HP) { m_iHP += HP; }
-    void IncreaseHP(float MaxHP) { m_iMaxHP = MaxHP; RestoreHP(); }
+    void HealHP(int HP) { m_iHP += HP; }
+    void IncreaseHP(int MaxHP) { m_iMaxHP = MaxHP; RestoreHP(); }
 
 public:
     const int GetLevel() const { return m_iLevel; }

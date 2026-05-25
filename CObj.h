@@ -35,7 +35,7 @@ public:
 	void SetPosX(float fX) { m_tInfo.fX += fX; }
 	void SetPosY(float fY) { m_tInfo.fY += fY; }
 	void SetObj(CObj* pObj) { m_pObj = pObj; }
-	void SetHP(float HP) { m_iHP = HP; }
+	void SetHP(int HP) { m_iHP = HP; }
 	void SetAngle(float fAngle) { m_fAngle = fAngle; }
 	void SetDead() { m_bDead = true; }
 

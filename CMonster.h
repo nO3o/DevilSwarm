@@ -5,13 +5,18 @@ class CMonster :
 {
 public:
     CMonster() {}
-    virtual ~CMonster() { Release(); }
+    virtual ~CMonster() {}
 
 public:
     void Initialize() override;
+
     int Update() override;
+
     void LateUpdate() override;
+
     void Render(HDC hDC) override;
+
     void Release() override;
+
 };
 

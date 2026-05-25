@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CMonster.h"
-#include "CObjMgr.h"
 
 void CMonster::Initialize()
 {
@@ -8,7 +7,7 @@ void CMonster::Initialize()
 
 int CMonster::Update()
 {
-	return NOEVENT;
+    return NOEVENT;
 }
 
 void CMonster::LateUpdate()
